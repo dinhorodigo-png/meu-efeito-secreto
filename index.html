@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efeito Visual Secreto</title>
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #00ff41; /* Texto verde neon */
+            font-family: monospace;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .terminal-line {
+            white-space: pre; /* Mantém a formatação exata */
+            font-size: 24px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="terminal" class="terminal-line"></div>
+
+    <script>
+        const terminalElement = document.getElementById('terminal');
+        const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:',.<>?/~";
+        
+        // --- SUA MENSAGEM SECRETA AQUI ---
+        // EDITE O TEXTO DENTRO DAS ASPAS SIMPLES ABAIXO
+        const targetMessage = 'Eu preciso de ajuda, por favor. Daqui a duas horas eu irei almoçar e o bongo vai estar lá, proteja-se'; 
+        // ---------------------------------
+        
+        const messageLength = targetMessage.length;
+        let currentMessage = "";
+
+        function getRandomCharacter() {
+            return characters[Math.floor(Math.random() * characters.length)];
+        }
+
+        // Inicializa a mensagem com caracteres aleatórios
+        for (let i = 0; i < messageLength; i++) {
+            currentMessage += getRandomCharacter();
+        }
+
+        // Função que atualiza a mensagem
+        function updateEffect() {
+            let newMessage = "";
+            for (let i = 0; i < messageLength; i++) {
+                // 15% de chance de mostrar o caractere real da mensagem
+                if (Math.random() < 0.15) { 
+                    newMessage += targetMessage[i];
+                } else {
+                    newMessage += getRandomCharacter();
+                }
+            }
+            currentMessage = newMessage;
+            terminalElement.textContent = currentMessage;
+        }
+
+        // Atualiza a cada 40ms para um efeito rápido e dinâmico
+        setInterval(updateEffect, 40); 
+    </script>
+</body>
+</html>
